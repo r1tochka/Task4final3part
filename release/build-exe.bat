@@ -10,7 +10,7 @@ set JDK_BIN="C:\Program Files\Java\jdk-21\bin\jpackage.exe"
   --main-jar "%JAR%" ^
   --main-class "%MAIN%" ^
   --name "%NAME%" ^
-  --type app-image ^
+  --type exe ^
   --module-path "%FX%" ^
   --add-modules javafx.controls,javafx.fxml ^
   --dest dist ^
