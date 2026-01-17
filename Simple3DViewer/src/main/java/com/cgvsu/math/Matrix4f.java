@@ -217,7 +217,6 @@ public class Matrix4f extends AbstractMatrix<Matrix4f, Vector4f> {
                 }
             }
 
-            // Выбор ведущей строки
 
             float[] temp = augmented[i];
             augmented[i] = augmented[maxRow];
