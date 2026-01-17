@@ -1,56 +1,40 @@
-# Task4final3part / Simple3DViewer
+# 3D Просмотрщик моделей
 
-JavaFX 3D Viewer (software rasterizer) for CGVSU Task 4.
+Простая программа для просмотра 3D-моделей в формате OBJ.
 
-## Features
+## Что умеет
 
-- Load OBJ models (`File -> Open Model...`)
-- Multiple models in a scene + active model selection
-- Model transforms (move/rotate/scale by axes) + reset
-- Delete active model / delete vertex or polygon by index
-- Rendering modes:
-  - wireframe
-  - texture
-  - lighting
-- Multiple cameras (add/remove/next/previous) + simple camera markers
-- Save models to OBJ:
-  - `Save Active Model...`
-  - `Save Active Model (Original)...`
-  - `Save Active Model (Transformed)...`
+- Загружать 3D-модели (формат OBJ)
+- Работать с несколькими моделями одновременно
+- Применять трансформации: перемещение, поворот, масштаб
+- Разные режимы отображения:
+  - Каркас модели
+  - С текстурами
+  - Со светом и тенями
+- Несколько камер для просмотра
+- Сохранять модели в файл
 
-## Requirements
+## Как запустить
 
-- Java 17
-- Maven (optional; you can run via IntelliJ)
-- JavaFX 17
+1. Установите Java 17
+2. Откройте проект в IntelliJ IDEA
+3. Запустите файл `com.cgvsu.Main`
 
-## How to run (IntelliJ IDEA)
+## Управление
 
-1. Open project folder `Task4final3part`.
-2. Open Maven tool window, reload project.
-3. Run `com.cgvsu.Main`.
+- **Выбор модели** — список слева
+- **Трансформации** — кнопки в левой панели
+- **Камера**:
+  - ЛКМ + движение мыши — вращение
+  - ПКМ + движение мыши — перемещение
+  - Колесико мыши — приближение/отдаление
 
-## How to run tests
+## Авторы
 
-- In IntelliJ: Maven -> `Simple3DViewer` -> Lifecycle -> `test`.
+Соколова Маргарита, Прошунин Егор, Боева Полина
 
-## Controls
+## Учебное заведение
 
-- **Active model**:
-  - Select in the left panel (ComboBox)
-  - Transform buttons in the left panel
-- **Keyboard shortcuts (model transform)**:
-  - `W/S/A/D` + `Space/C` - translate
-  - `Q/E/R/F` - rotate
-  - `+/-` - scale
-  - `Backspace` - reset transform
-- **Camera**:
-  - LMB drag - rotate
-  - RMB drag - pan
-  - Mouse wheel - zoom
+Воронежский государственный университет, факультет компьютерных наук, 2 курс, 4 группа
 
-## Project structure
-
-- `Simple3DViewer/` - main JavaFX application module
-- `src/main/java/com/cgvsu/` - UI controller, math, model, OBJ IO, render engine
-- `src/test/java/` - unit tests
+*Проект выполнен в рамках учебного задания по компьютерной графике.*
