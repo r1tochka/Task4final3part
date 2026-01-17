@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ObjReaderTest {
@@ -31,43 +34,37 @@ class ObjReaderTest {
     @Test
     public void testParseVertex03() {
         ArrayList<String> wordsInLineWithoutToken = new ArrayList<>(Arrays.asList("ab", "o", "ba"));
-        try {
-            ObjReader.parseVertex(wordsInLineWithoutToken, 10);
-        } catch (ObjReaderException exception) {
-            String expectedError = "Error parsing OBJ file on line: 10. Failed to parse float value.";
-            assertEquals(expectedError, exception.getMessage());
-        }
+        ObjReaderException ex = assertThrows(ObjReaderException.class, () -> ObjReader.parseVertex(wordsInLineWithoutToken, 10));
+        assertTrue(ex.getMessage().contains("Error parsing OBJ file on line: 10."));
+        assertTrue(ex.getMessage().contains("Invalid vertex coordinate format"));
     }
 
     @Test
     public void testParseVertex04() {
         ArrayList<String> wordsInLineWithoutToken = new ArrayList<>(Arrays.asList("1.0", "2.0"));
-        try {
-            ObjReader.parseVertex(wordsInLineWithoutToken, 10);
-        } catch (ObjReaderException exception) {
-            String expectedError = "Error parsing OBJ file on line: 10. Too few vertex arguments.";
-            assertEquals(expectedError, exception.getMessage());
-        }
+        ObjReaderException ex = assertThrows(ObjReaderException.class, () -> ObjReader.parseVertex(wordsInLineWithoutToken, 10));
+        assertTrue(ex.getMessage().contains("Error parsing OBJ file on line: 10."));
+        assertTrue(ex.getMessage().contains("Vertex requires at least 3 coordinates"));
     }
 
     @Test
     public void testParseVertex05() {
-        ArrayList<String> wordsInLineWithoutToken = new ArrayList<>(Arrays.asList("1.0", "2.0", "3.0", "4.0"));
+        ArrayList<String> wordsInLineWithoutToken = new ArrayList<>(Arrays.asList("1.0", "2.0", "3.0", "1.0"));
         Vector3f result = ObjReader.parseVertex(wordsInLineWithoutToken, 1);
         assertEquals(new Vector3f(1.0f, 2.0f, 3.0f), result);
     }
 
     @Test
-    public void testParseTextureVertexWithTooManyArguments() {
-        ArrayList<String> words = new ArrayList<>(Arrays.asList("1.0", "2.0", "3.0"));
+    public void testParseTextureVertexWithWDividesCoordinates() {
+        ArrayList<String> words = new ArrayList<>(Arrays.asList("1.0", "2.0", "2.0"));
         Vector2f result = ObjReader.parseTextureVertex(words, 1);
-        assertEquals(new Vector2f(1.0f, 2.0f), result);
+        assertEquals(new Vector2f(0.5f, 1.0f), result);
     }
 
     @Test
     public void testParseNormalWithTooManyArguments() {
         ArrayList<String> words = new ArrayList<>(Arrays.asList("1.0", "2.0", "3.0", "4.0"));
-        Vector3f result = ObjReader.parseNormal(words, 1);
-        assertEquals(new Vector3f(1.0f, 2.0f, 3.0f), result);
+        ObjReaderException ex = assertThrows(ObjReaderException.class, () -> ObjReader.parseNormal(words, 1));
+        assertTrue(ex.getMessage().contains("Normal requires exactly 3 coordinates"));
     }
 }

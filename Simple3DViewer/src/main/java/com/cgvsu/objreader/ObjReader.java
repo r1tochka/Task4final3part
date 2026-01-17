@@ -55,7 +55,6 @@ public class ObjReader {
     public static ReadResult readContent(String fileContent) throws ObjReaderException {
         Model model = new Model();
         ArrayList<String> warnings = new ArrayList<>();
-        boolean isTransformed = false;
 
         if (fileContent == null || fileContent.trim().isEmpty()) {
             throw new ObjReaderException("File content is empty", 0);
@@ -110,7 +109,10 @@ public class ObjReader {
             }
         }
 
-        model.setTransformed(isTransformed);
+        if (model.getVertices().isEmpty()) {
+            throw new ObjReaderException("OBJ has no vertex coordinates", 0);
+        }
+
         validateModel(model, warnings);
 
         return new ReadResult(model, warnings);
