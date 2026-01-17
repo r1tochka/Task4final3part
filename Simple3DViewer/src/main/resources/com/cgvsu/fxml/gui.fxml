@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+
+<BorderPane fx:id="rootPane" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.cgvsu.GuiController"
+            focusTraversable="true"
+            styleClass="app-root">
+    <top>
+        <MenuBar>
+            <menus>
+                <Menu text="File">
+                    <items>
+                        <MenuItem fx:id="openModelMenuItem"
+                                  onAction="#onOpenModelMenuItemClick"
+                                  text="Open Model..." />
+                        <MenuItem text="Save Active Model..."
+                                  onAction="#onSaveActiveModelMenuItemClick" />
+                        <MenuItem text="Save Active Model (Original)..."
+                                  onAction="#onSaveActiveModelOriginalMenuItemClick" />
+                        <MenuItem text="Save Active Model (Transformed)..."
+                                  onAction="#onSaveActiveModelTransformedMenuItemClick" />
+                        <MenuItem text="Load Texture..."
+                                  onAction="#onLoadTextureMenuItemClick" />
+                        <SeparatorMenuItem />
+                        <MenuItem text="Exit" />
+                    </items>
+                </Menu>
+                <Menu text="Edit">
+                    <items>
+                        <MenuItem text="Delete Active Model" onAction="#onDeleteActiveModel" />
+                        <SeparatorMenuItem />
+                        <MenuItem text="Delete Vertex by Index..." onAction="#onDeleteVertexByIndex" />
+                        <MenuItem text="Delete Polygon by Index..." onAction="#onDeletePolygonByIndex" />
+                    </items>
+                </Menu>
+                <Menu text="Camera">
+                    <items>
+                        <MenuItem text="Add Camera" onAction="#onAddCamera" />
+                        <MenuItem text="Remove Active Camera" onAction="#onRemoveCamera" />
+                        <SeparatorMenuItem />
+                        <MenuItem text="Next Camera" onAction="#onNextCamera" />
+                        <MenuItem text="Previous Camera" onAction="#onPreviousCamera" />
+                    </items>
+                </Menu>
+                <Menu text="Settings">
+                    <items>
+                        <MenuItem text="Toggle Theme" onAction="#onToggleTheme" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+
+    <left>
+        <ScrollPane fitToWidth="true" prefWidth="260.0" styleClass="side-panel,side-panel-left">
+            <content>
+                <VBox spacing="8.0" styleClass="sidebar">
+                    <children>
+                        <Label text="Active Model" styleClass="section-title" />
+                        <ComboBox fx:id="modelSelector" onAction="#onModelSelected" />
+                        <Label fx:id="modelInfoLabel" text="No models loaded" styleClass="hint-text" />
+                        <Button text="Delete Active Model" onAction="#onDeleteActiveModel" maxWidth="Infinity" />
+
+                        <Separator />
+
+                        <Label text="Model Transform" styleClass="panel-title" />
+                        <Label text="Move" styleClass="secondary-text" />
+                        <GridPane hgap="6" vgap="6">
+                            <columnConstraints>
+                                <ColumnConstraints percentWidth="50" />
+                                <ColumnConstraints percentWidth="50" />
+                            </columnConstraints>
+                            <Button text="X-" onAction="#handleTranslateXMinus" maxWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                            <Button text="X+" onAction="#handleTranslateXPlus" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                            <Button text="Y-" onAction="#handleTranslateYMinus" maxWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                            <Button text="Y+" onAction="#handleTranslateYPlus" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                            <Button text="Z-" onAction="#handleTranslateZMinus" maxWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                            <Button text="Z+" onAction="#handleTranslateZPlus" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        </GridPane>
+
+                        <Label text="Rotate" styleClass="secondary-text" />
+                        <GridPane hgap="6" vgap="6">
+                            <columnConstraints>
+                                <ColumnConstraints percentWidth="50" />
+                                <ColumnConstraints percentWidth="50" />
+                            </columnConstraints>
+                            <Button text="X-" onAction="#handleRotateXMinus" maxWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                            <Button text="X+" onAction="#handleRotateXPlus" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                            <Button text="Y-" onAction="#handleRotateYMinus" maxWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                            <Button text="Y+" onAction="#handleRotateYPlus" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                            <Button text="Z-" onAction="#handleRotateZMinus" maxWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                            <Button text="Z+" onAction="#handleRotateZPlus" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        </GridPane>
+
+                        <Label text="Scale" styleClass="secondary-text" />
+                        <GridPane hgap="6" vgap="6">
+                            <columnConstraints>
+                                <ColumnConstraints percentWidth="50" />
+                                <ColumnConstraints percentWidth="50" />
+                            </columnConstraints>
+                            <Button text="X-" onAction="#handleScaleXDown" maxWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                            <Button text="X+" onAction="#handleScaleXUp" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                            <Button text="Y-" onAction="#handleScaleYDown" maxWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                            <Button text="Y+" onAction="#handleScaleYUp" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                            <Button text="Z-" onAction="#handleScaleZDown" maxWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                            <Button text="Z+" onAction="#handleScaleZUp" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        </GridPane>
+
+                        <Button text="Reset Transform" onAction="#handleResetTransform" maxWidth="Infinity" />
+
+                        <Separator />
+
+                        <Label text="Rendering Modes" style="-fx-font-weight: bold; -fx-font-size: 14px;" styleClass="rendering-modes-label" />
+                        <VBox spacing="5">
+                            <CheckBox fx:id="drawWireframeCheckBox" text="Draw Wireframe" />
+                            <CheckBox fx:id="useTextureCheckBox" text="Use Texture" />
+                            <CheckBox fx:id="useLightingCheckBox" text="Use Lighting" />
+                        </VBox>
+
+                        <Separator />
+
+                        <Label text="Polygon Color" style="-fx-font-weight: bold; -fx-font-size: 12px;" />
+                        <ColorPicker fx:id="polygonColorPicker" />
+
+                        <Separator />
+
+                        <Label text="Camera Controls" style="-fx-font-weight: bold; -fx-font-size: 14px;" />
+                        <GridPane hgap="5" vgap="5">
+                            <columnConstraints>
+                                <ColumnConstraints minWidth="80" />
+                                <ColumnConstraints minWidth="80" />
+                            </columnConstraints>
+
+                            <Button text="Forward (W)" onAction="#handleCameraForward" prefWidth="80" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                            <Button text="Backward (S)" onAction="#handleCameraBackward" prefWidth="80" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                            <Button text="Left (A)" onAction="#handleCameraLeft" prefWidth="80" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                            <Button text="Right (D)" onAction="#handleCameraRight" prefWidth="80" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                            <Button text="Up (Q)" onAction="#handleCameraUp" prefWidth="80" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                            <Button text="Down (E)" onAction="#handleCameraDown" prefWidth="80" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        </GridPane>
+
+                        <Separator />
+
+                        <Label text="Keyboard Shortcuts" style="-fx-font-weight: bold; -fx-font-size: 12px;" />
+                        <Label text="Model: WASDQE - move" style="-fx-font-size: 10px;" />
+                        <Label text="IJKLUO - rotate" style="-fx-font-size: 10px;" />
+                        <Label text="+/- scale, R - reset" style="-fx-font-size: 10px;" />
+                        <Label text="Mouse: LMB - rotate" style="-fx-font-size: 10px;" />
+                        <Label text="RMB - pan, Scroll - zoom" style="-fx-font-size: 10px;" />
+                    </children>
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10" />
+                    </padding>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </left>
+
+    <center>
+        <StackPane fx:id="canvasContainer" styleClass="viewport">
+            <children>
+                <Canvas fx:id="canvas" width="1200.0" height="800.0" />
+            </children>
+        </StackPane>
+    </center>
+</BorderPane>
