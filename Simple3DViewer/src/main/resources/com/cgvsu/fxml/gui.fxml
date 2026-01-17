@@ -149,7 +149,6 @@
 
                         <Label text="Keyboard Shortcuts" style="-fx-font-weight: bold; -fx-font-size: 12px;" />
                         <Label text="Model: WASDQE - move" style="-fx-font-size: 10px;" />
-                        <Label text="IJKLUO - rotate" style="-fx-font-size: 10px;" />
                         <Label text="+/- scale, R - reset" style="-fx-font-size: 10px;" />
                         <Label text="Mouse: LMB - rotate" style="-fx-font-size: 10px;" />
                         <Label text="RMB - pan, Scroll - zoom" style="-fx-font-size: 10px;" />

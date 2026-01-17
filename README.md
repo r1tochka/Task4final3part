@@ -1,56 +1,24 @@
-# Task4final3part / Simple3DViewer
+# Проект Simple3DViewer
 
-JavaFX 3D Viewer (software rasterizer) for CGVSU Task 4.
+## Что умеет
 
-## Features
+- Загружать 3D-модели (формат OBJ)
+- Работать с несколькими моделями одновременно в комбобоксе    
+- Применять к модели трансформации: перемещение, поворот, масштаб
+- Использовать разные режимы отображения: только каркас модели, наложение текстур, наложение теней и света
+- Подключать несколько камер для просмотра
+- Сохранять изменённые модели в файл
 
-- Load OBJ models (`File -> Open Model...`)
-- Multiple models in a scene + active model selection
-- Model transforms (move/rotate/scale by axes) + reset
-- Delete active model / delete vertex or polygon by index
-- Rendering modes:
-  - wireframe
-  - texture
-  - lighting
-- Multiple cameras (add/remove/next/previous) + simple camera markers
-- Save models to OBJ:
-  - `Save Active Model...`
-  - `Save Active Model (Original)...`
-  - `Save Active Model (Transformed)...`
+## Как запустить
 
-## Requirements
+1. Установите Java 17
+2. Откройте проект в IntelliJ IDEA
+3. Запустите файл `com.cgvsu.Main`
 
-- Java 17
-- Maven (optional; you can run via IntelliJ)
-- JavaFX 17
+## Над проектом работали
 
-## How to run (IntelliJ IDEA)
+Соколова Маргарита (суетолог), Прошунин Егор (замечательный тимлид), Боева Полина (проджект-менеджер)
 
-1. Open project folder `Task4final3part`.
-2. Open Maven tool window, reload project.
-3. Run `com.cgvsu.Main`.
+## Учебное заведение
 
-## How to run tests
-
-- In IntelliJ: Maven -> `Simple3DViewer` -> Lifecycle -> `test`.
-
-## Controls
-
-- **Active model**:
-  - Select in the left panel (ComboBox)
-  - Transform buttons in the left panel
-- **Keyboard shortcuts (model transform)**:
-  - `W/S/A/D` + `Space/C` - translate
-  - `Q/E/R/F` - rotate
-  - `+/-` - scale
-  - `Backspace` - reset transform
-- **Camera**:
-  - LMB drag - rotate
-  - RMB drag - pan
-  - Mouse wheel - zoom
-
-## Project structure
-
-- `Simple3DViewer/` - main JavaFX application module
-- `src/main/java/com/cgvsu/` - UI controller, math, model, OBJ IO, render engine
-- `src/test/java/` - unit tests
+Воронежский государственный университет, факультет компьютерных наук, 2 курс, 4 группа
