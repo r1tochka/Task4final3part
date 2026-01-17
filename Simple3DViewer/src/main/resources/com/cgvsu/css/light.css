@@ -1,0 +1,22 @@
+.root {
+    -fx-base: #ffffff;
+    -fx-background: #ffffff;
+}
+
+.sidebar {
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-padding: 10;
+    -fx-background-radius: 5;
+    -fx-border-color: rgba(0, 0, 0, 0.08);
+    -fx-border-radius: 5;
+}
+
+.section-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+}
+
+.hint-text {
+    -fx-font-size: 11px;
+    -fx-text-fill: #444444;
+}

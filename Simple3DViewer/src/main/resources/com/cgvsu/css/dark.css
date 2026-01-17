@@ -1,0 +1,70 @@
+.root {
+    -fx-base: #1e1e1e;
+    -fx-background: #1e1e1e;
+    -fx-background-color: #1e1e1e;
+}
+
+.border-pane {
+    -fx-background-color: #1e1e1e;
+}
+
+.stack-pane {
+    -fx-background-color: #1e1e1e;
+}
+
+.scroll-pane {
+    -fx-background: #1e1e1e;
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: #1e1e1e;
+}
+
+.sidebar {
+    -fx-background-color: rgba(30, 30, 30, 0.92);
+    -fx-padding: 10;
+    -fx-background-radius: 5;
+    -fx-border-color: rgba(255, 255, 255, 0.10);
+    -fx-border-radius: 5;
+}
+
+.section-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-text-fill: #f0f0f0;
+}
+
+.hint-text {
+    -fx-font-size: 11px;
+    -fx-text-fill: #c8c8c8;
+}
+
+.label {
+    -fx-text-fill: #f0f0f0;
+}
+
+.menu-bar {
+    -fx-background-color: #2a2a2a;
+}
+
+.menu-bar .label {
+    -fx-text-fill: #f0f0f0;
+}
+
+.combo-box, .color-picker, .button, .check-box {
+    -fx-text-fill: #f0f0f0;
+}
+
+.combo-box-base {
+    -fx-background-color: #2a2a2a;
+}
+
+.check-box .box {
+    -fx-background-color: #2a2a2a;
+    -fx-border-color: rgba(255, 255, 255, 0.25);
+}
+
+.separator *.line {
+    -fx-border-color: rgba(255, 255, 255, 0.15);
+}
