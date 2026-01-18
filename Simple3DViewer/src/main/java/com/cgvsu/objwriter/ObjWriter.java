@@ -27,9 +27,6 @@ public final class ObjWriter {
         try (FileWriter writer = new FileWriter(fileName)) {
             writeVertices(writer, model.getVertices());
             writer.write("\n");
-
-            // OBJ expects vt/vn indices even if we write them as 1:1 with vertices.
-            // If model already has texture vertices, we write them; otherwise generate simple planar UV.
             List<Vector2f> textureCoords = model.getTextureVertices();
             if (textureCoords == null || textureCoords.isEmpty()) {
                 textureCoords = generateTextureCoordinates(model.getVertices());
@@ -37,7 +34,6 @@ public final class ObjWriter {
             writeTextureVertices(writer, textureCoords);
             writer.write("\n");
 
-            // If model already has normals, write them; otherwise compute per-vertex normals from polygons.
             List<Vector3f> normals = model.getNormals();
             if (normals == null || normals.isEmpty()) {
                 normals = calculateNormals(model.getVertices(), model.getPolygons());

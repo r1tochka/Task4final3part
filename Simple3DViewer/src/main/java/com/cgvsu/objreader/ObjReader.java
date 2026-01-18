@@ -51,11 +51,9 @@ public class ObjReader {
         }
     }
 
-    // Расширенный метод чтения с результатом и предупреждениями
     public static ReadResult readContent(String fileContent) throws ObjReaderException {
         Model model = new Model();
         ArrayList<String> warnings = new ArrayList<>();
-        boolean isTransformed = false;
 
         if (fileContent == null || fileContent.trim().isEmpty()) {
             throw new ObjReaderException("File content is empty", 0);
@@ -110,13 +108,15 @@ public class ObjReader {
             }
         }
 
-        model.setTransformed(isTransformed);
+        if (model.getVertices().isEmpty()) {
+            throw new ObjReaderException("OBJ has no vertex coordinates", 0);
+        }
+
         validateModel(model, warnings);
 
         return new ReadResult(model, warnings);
     }
 
-    // Чтение из файла
     public static ReadResult readFile(Path filePath) throws IOException, ObjReaderException {
         if (!Files.exists(filePath)) {
             throw new IOException("File does not exist: " + filePath);
@@ -189,18 +189,12 @@ public class ObjReader {
         try {
             float u = parseFloatSafe(wordsInLineWithoutToken.get(0), lineInd);
             float v = 0.0f;
-            float w = 1.0f;
 
             if (wordsInLineWithoutToken.size() >= 2) {
                 v = parseFloatSafe(wordsInLineWithoutToken.get(1), lineInd);
             }
             if (wordsInLineWithoutToken.size() == 3) {
-                w = parseFloatSafe(wordsInLineWithoutToken.get(2), lineInd);
-                if (Math.abs(w) < 1e-6) {
-                    throw new ObjReaderException("Texture vertex w coordinate cannot be zero", lineInd);
-                }
-                u /= w;
-                v /= w;
+                parseFloatSafe(wordsInLineWithoutToken.get(2), lineInd);
             }
 
             return new Vector2f(u, v);
