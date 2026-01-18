@@ -904,7 +904,7 @@ public class GuiController {
         if (rootPane == null || rootPane.getScene() == null) {
             return;
         }
-        String cssPath = darkTheme ? "/com/cgvsu/styles/theme-dark.css" : "/com/cgvsu/styles/theme-light.css";
+        String cssPath = darkTheme ? "/com/cgvsu/css/dark.css" : "/com/cgvsu/css/light.css";
         var url = getClass().getResource(cssPath);
         if (url == null) {
             return;

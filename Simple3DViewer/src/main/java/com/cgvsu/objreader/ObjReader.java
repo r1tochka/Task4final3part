@@ -51,7 +51,6 @@ public class ObjReader {
         }
     }
 
-    // Расширенный метод чтения с результатом и предупреждениями
     public static ReadResult readContent(String fileContent) throws ObjReaderException {
         Model model = new Model();
         ArrayList<String> warnings = new ArrayList<>();
@@ -118,7 +117,6 @@ public class ObjReader {
         return new ReadResult(model, warnings);
     }
 
-    // Чтение из файла
     public static ReadResult readFile(Path filePath) throws IOException, ObjReaderException {
         if (!Files.exists(filePath)) {
             throw new IOException("File does not exist: " + filePath);
