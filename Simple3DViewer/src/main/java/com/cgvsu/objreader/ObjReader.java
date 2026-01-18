@@ -189,18 +189,12 @@ public class ObjReader {
         try {
             float u = parseFloatSafe(wordsInLineWithoutToken.get(0), lineInd);
             float v = 0.0f;
-            float w = 1.0f;
 
             if (wordsInLineWithoutToken.size() >= 2) {
                 v = parseFloatSafe(wordsInLineWithoutToken.get(1), lineInd);
             }
             if (wordsInLineWithoutToken.size() == 3) {
-                w = parseFloatSafe(wordsInLineWithoutToken.get(2), lineInd);
-                if (Math.abs(w) < 1e-6) {
-                    throw new ObjReaderException("Texture vertex w coordinate cannot be zero", lineInd);
-                }
-                u /= w;
-                v /= w;
+                parseFloatSafe(wordsInLineWithoutToken.get(2), lineInd);
             }
 
             return new Vector2f(u, v);
